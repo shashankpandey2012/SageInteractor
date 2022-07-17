@@ -14,8 +14,8 @@ db.on("open", () => {
 
 const SageInteractor = require("../SageInteractor");
 const body = {
-  title: "Batman",
-  movieId: 6,
+  title: "Batman Series",
+  movieId: 8,
   year: 2020,
   genre: "Thriller",
   imdbRating: 9,
@@ -27,24 +27,28 @@ describe("SageInteractorTest", function () {
   it("CreateNewMovie", async function () {
     let sageInteractor = new SageInteractor();
     const response = await sageInteractor.createNewMovie(body);
+    console.log("response", response.data);
     expect(response.status).to.equal(200);
     expect(response.data.movieId).to.equal(body.movieId);
   });
   it("GetMovieById", async function () {
     let sageInteractor = new SageInteractor();
     const response = await sageInteractor.getMovieById(body.movieId);
+    console.log("response", response.data);
     expect(response.status).to.equal(200);
     expect(response.data[0].title).to.equal(body.title);
   });
   it("GetMovieTitleByMovieId", async function () {
     let sageInteractor = new SageInteractor();
     const response = await sageInteractor.getMovieTitleById(body.movieId);
+    console.log("response", response.data);
     expect(response.status).to.equal(200);
     expect(response.data[0].title).to.equal(body.title);
   });
   it("GetAllMoviesSortByTimestampDesc", async function () {
     let sageInteractor = new SageInteractor();
     const response = await sageInteractor.getAllMovies("createdAt", -1);
+    console.log("response", response.data);
     expect(response.status).to.equal(200);
     let length = response.data.length;
     if (length > 0) {
@@ -58,6 +62,7 @@ describe("SageInteractorTest", function () {
   it("GetAllMoviesSortByTimestampAsc", async function () {
     let sageInteractor = new SageInteractor();
     const response = await sageInteractor.getAllMovies("createdAt", 1);
+    console.log("response", response.data);
     expect(response.status).to.equal(200);
     let length = response.data.length;
     if (length > 0) {
